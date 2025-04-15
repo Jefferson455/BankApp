@@ -1,48 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:login_welcome/src/layouts/colorsApp.dart';
 import 'loginScreen.dart'; // Asegúrate de ajustar la ruta según tu estructura de proyecto
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Puedes omitir el appBar para una pantalla de entrada más limpia
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Botón para "Registrarme"
-              ElevatedButton(
-                onPressed: () {
-                  // Aquí puedes implementar la lógica de registro o navegar a otra pantalla de registro.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Funcionalidad de registro no implementada aún.',
-                      ),
-                    ),
-                  );
-                },
-                child: const Text('Registrarme'),
-              ),
-              const SizedBox(height: 20),
-              // Botón para "Iniciar sesión"
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Iniciar sesión'),
-              ),
-            ],
+      backgroundColor: ColorsApp.background,
+      appBar: AppBar(
+        backgroundColor: ColorsApp.background,
+        toolbarHeight: 150,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 30),
+          child: Text(
+            "BankApp",
+            style: TextStyle(
+              fontSize: 55,
+              fontWeight: FontWeight.bold,
+              color: ColorsApp.wText,
+            ),
           ),
+        ),
+        centerTitle: false,
+      ),
+      // Puedes omitir el appBar para una pantalla de entrada más limpia
+      body: Center(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 210, right: 50, left: 50),
+              child: Text(
+                "“El futuro de tus finanzas, en tus manos.”",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: ColorsApp.fText),
+              ),
+            ),
+            // Botón para "Iniciar sesión"
+            Padding(
+              padding: const EdgeInsets.only(top: 290),
+              child: SizedBox(
+                width: 250,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text('Iniciar sesión'),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

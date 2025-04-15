@@ -12,8 +12,7 @@ class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login Welcome',
-      theme: ThemeData.dark(), // se puede cambiar a light()
+      title: 'Login Welcome', // se puede cambiar a light()
       home: const WelcomeScreen(),
       debugShowCheckedModeBanner: false,
     );
