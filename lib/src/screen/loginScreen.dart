@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_welcome/src/layouts/colorsApp.dart';
 import 'package:login_welcome/src/screen/homeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,15 +34,24 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login App')),
+      backgroundColor: ColorsApp.background,
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Iniciar sesión', style: TextStyle(fontSize: 24)),
+            const Text(
+              'Iniciar sesión',
+              style: const TextStyle(
+                fontFamily: "BebasNeueRegular",
+                fontSize: 80,
+                color: ColorsApp.wText,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 20),
             TextField(
+              cursorColor: ColorsApp.accent,
               controller: _userController,
               decoration: const InputDecoration(
                 labelText: 'Usuario',
