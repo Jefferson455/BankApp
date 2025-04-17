@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:login_welcome/src/core/controllers/login_controller.dart';
+import 'package:login_welcome/src/core/services/auth_service.dart';
 import 'package:login_welcome/src/layouts/colorsApp.dart';
 import 'package:login_welcome/src/screen/homeScreen.dart';
+import 'package:login_welcome/src/layouts/error_banner.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,24 +13,27 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _userController = TextEditingController();
-  final TextEditingController _passController = TextEditingController();
+  final _userController = TextEditingController();
+  final _passController = TextEditingController();
 
-  String _message = '';
+  // instanciamos nuestro controller
+  final _loginController = LoginController(AuthService());
 
-  void _login() {
+  void _onLoginPressed() async {
     final username = _userController.text.trim();
     final password = _passController.text;
 
-    if (username == 'jeffer' && password == '1234') {
+    // delegamos la lógica al controller
+    final error = await _loginController.login(username, password);
+    if (error == null) {
+      // credenciales ok
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
     } else {
-      setState(() {
-        _message = '❌ Usuario o contraseña incorrecta.';
-      });
+      // mostramos banner de error
+      showErrorBanner(context, message: error);
     }
   }
 
@@ -40,26 +46,32 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Iniciar sesión',
-              style: const TextStyle(
-                fontFamily: "BebasNeueRegular",
-                fontSize: 80,
-                color: ColorsApp.wText,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.only(top: 10, right: 60),
+              child: const Text(
+                'Iniciar sesión',
+                style: TextStyle(
+                  fontFamily: "BebasNeueRegular",
+                  fontSize: 65,
+                  color: ColorsApp.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(height: 20),
             TextField(
-              cursorColor: ColorsApp.accent,
+              cursorColor: ColorsApp.white,
               controller: _userController,
               decoration: const InputDecoration(
                 labelText: 'Usuario',
                 border: OutlineInputBorder(),
               ),
+              style: TextStyle(color: ColorsApp.white),
             ),
             const SizedBox(height: 16),
             TextField(
+              cursorColor: ColorsApp.white,
+              style: TextStyle(color: ColorsApp.white),
               controller: _passController,
               obscureText: true,
               decoration: const InputDecoration(
@@ -67,12 +79,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 24),
-            ElevatedButton(onPressed: _login, child: const Text('Ingresar')),
-            const SizedBox(height: 16),
-            Text(
-              _message,
-              style: const TextStyle(fontSize: 16, color: Colors.amber),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: ElevatedButton(
+                onPressed: _onLoginPressed,
+                child: const Text('Ingresar'),
+              ),
             ),
           ],
         ),

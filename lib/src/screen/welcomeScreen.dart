@@ -19,7 +19,7 @@ class WelcomeScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 55,
               fontWeight: FontWeight.bold,
-              color: ColorsApp.wText,
+              color: ColorsApp.white,
             ),
           ),
         ),
@@ -34,7 +34,7 @@ class WelcomeScreen extends StatelessWidget {
               child: Text(
                 "“El futuro de tus finanzas, en tus manos.”",
                 textAlign: TextAlign.center,
-                style: TextStyle(color: ColorsApp.fText),
+                style: TextStyle(color: ColorsApp.white),
               ),
             ),
             // Botón para "Iniciar sesión"
