@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:login_welcome/src/layouts/colorsApp.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,6 +7,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final NumberFormat _nf = NumberFormat.decimalPattern('es');
+    int saldo = 1234567890;
+    String saldoFormateado = _nf.format(saldo); // "1.000.000"
     return Scaffold(
       backgroundColor: ColorsApp.backgroundComponent,
       appBar: AppBar(
@@ -63,13 +67,13 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
                   'Saldo: ',
                   style: TextStyle(fontSize: 20, color: ColorsApp.white),
                 ),
                 Text(
-                  '\$1000000',
+                  '\$$saldoFormateado',
                   style: TextStyle(
                     fontSize: 20,
                     color: ColorsApp.accent,
@@ -305,7 +309,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Puedes seguir agregando más cards aquí...
+                  //! Espacio para meter más CARDS
                 ],
               ),
             ),
