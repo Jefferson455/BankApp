@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_welcome/src/layouts/colorsApp.dart';
-import 'loginScreen.dart'; // Asegúrate de ajustar la ruta según tu estructura de proyecto
+import 'package:login_welcome/src/layouts/colors_app.dart';
+import 'login_screen.dart'; // Asegúrate de ajustar la ruta según tu estructura de proyecto
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -79,7 +79,10 @@ class WelcomeScreen extends StatelessWidget {
                         MaterialPageRoute(builder: (c) => const LoginScreen()),
                       );
                     },
-                    child: const Text('Iniciar sesión'),
+                    child: const Text(
+                      'Iniciar sesión',
+                      style: TextStyle(color: ColorsApp.backgroundComponent),
+                    ),
                   ),
                 ),
               ),

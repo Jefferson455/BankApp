@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:login_welcome/src/layouts/colorsApp.dart';
+import 'package:login_welcome/src/layouts/colors_app.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 child: IconButton(
                   icon: const Icon(
                     Icons.outbound_sharp,
-                    color: ColorsApp.black,
+                    color: ColorsApp.purple,
                   ),
                   onPressed: () {
                     Navigator.popUntil(context, (route) => route.isFirst);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_welcome/src/layouts/colorsApp.dart';
+import 'package:login_welcome/src/layouts/colors_app.dart';
 
 /// Muestra un MaterialBanner de error en la parte superior del Scaffold.
 /// Se oculta automáticamente después de [duration].

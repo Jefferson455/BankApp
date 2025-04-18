@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_welcome/src/core/controllers/login_controller.dart';
 import 'package:login_welcome/src/core/services/auth_service.dart';
-import 'package:login_welcome/src/layouts/colorsApp.dart';
-import 'package:login_welcome/src/screen/homeScreen.dart';
+import 'package:login_welcome/src/layouts/colors_app.dart';
+import 'package:login_welcome/src/screen/home_screen.dart';
 import 'package:login_welcome/src/layouts/error_banner.dart';
 
 class LoginScreen extends StatefulWidget {
