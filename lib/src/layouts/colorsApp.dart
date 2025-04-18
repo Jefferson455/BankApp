@@ -7,6 +7,7 @@ class ColorsApp {
   static const Color accent = Color(0xFFFFC400);
   static const Color white = Color(0xFFFFFFFF);
   static const Color errorRed = Color.fromARGB(255, 98, 34, 34);
+  static const Color black = Color.fromARGB(255, 0, 0, 0);
 
   //Backgrounds
   static const Color backgroundComponent = Color(0xFF0E0B20);

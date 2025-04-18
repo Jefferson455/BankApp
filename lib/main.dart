@@ -14,7 +14,7 @@ class LoginApp extends StatelessWidget {
     return MaterialApp(
       title: 'Login Welcome', // se puede cambiar a light()
       home: const WelcomeScreen(),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, //! Remueve la tira de debug de la app
     );
   }
 }
