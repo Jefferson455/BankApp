@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "288969786881",
+    "project_id": "bankapp-29f1b",
+    "storage_bucket": "bankapp-29f1b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288969786881:android:b7313e5d8865ab5dd5a200",
+        "android_client_info": {
+          "package_name": "com.example.login_welcome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyPgzU10GQt-Ilo6kfualKlRtW8JPaep4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
