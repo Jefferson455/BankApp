@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
+import 'package:login_welcome/src/screen/deposit_screen.dart';
+import 'package:login_welcome/src/screen/withdraw_screen.dart';
 
 /// Widget que agrupa todos los cards de la pantalla principal
 class CardsHome extends StatelessWidget {
@@ -71,7 +73,10 @@ class _RetirarCard extends StatelessWidget {
                   backgroundColor: ColorsApp.accent,
                 ),
                 onPressed: () {
-                  // Acción de retirar dinero
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (c) => const WithdrawScreen()),
+                  );
                 },
                 child: const Text(
                   'Retirar',
@@ -141,7 +146,10 @@ class _DepositarCard extends StatelessWidget {
                   backgroundColor: ColorsApp.accent,
                 ),
                 onPressed: () {
-                  // Acción de depositar dinero
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (c) => const DepositScreen()),
+                  );
                 },
                 child: const Text(
                   'Depositar',

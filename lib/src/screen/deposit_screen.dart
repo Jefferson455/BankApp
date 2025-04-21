@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
 
-/// Pantalla para seleccionar el monto a retirar
-class WithdrawScreen extends StatefulWidget {
-  const WithdrawScreen({Key? key}) : super(key: key);
+/// Pantalla para seleccionar el monto a Depositar
+class DepositScreen extends StatefulWidget {
+  const DepositScreen({Key? key}) : super(key: key);
 
   @override
-  State<WithdrawScreen> createState() => _WithdrawScreenState();
+  State<DepositScreen> createState() => _DepositScreenState();
 }
 
-class _WithdrawScreenState extends State<WithdrawScreen> {
+class _DepositScreenState extends State<DepositScreen> {
   // Montos predefinidos (en COP)
   static const List<int> _amountOptions = [10000, 20000, 50000, 100000, 200000];
 
@@ -27,7 +27,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
         backgroundColor: ColorsApp.purpleLight,
         elevation: 0,
         title: const Text(
-          'Retirar dinero',
+          'Depositar dinero',
           style: TextStyle(color: ColorsApp.black),
         ),
         iconTheme: const IconThemeData(color: ColorsApp.black),
