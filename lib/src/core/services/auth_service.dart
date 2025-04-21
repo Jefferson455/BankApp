@@ -1,8 +1,17 @@
-class AuthService {
-  /// Simula llamada a un backend.
-  Future<bool> authenticate(String username, String password) async {
-    // aquí podrías hacer un HTTP request real
-    await Future.delayed(const Duration(milliseconds: 500));
-    return username == 'jeffer' && password == '1234';
+// lib/src/core/services/user_service.dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+class UserService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<Map<String, dynamic>?> getUserData() async {
+    print(FirebaseAuth.instance.currentUser?.uid);
+    final user = _auth.currentUser;
+    if (user == null) return null;
+
+    final doc = await _firestore.collection('users').doc(user.uid).get();
+    return doc.data();
   }
 }

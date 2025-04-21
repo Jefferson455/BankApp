@@ -3,15 +3,41 @@ import 'package:intl/intl.dart';
 import 'package:login_welcome/src/layouts/cards_home.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
 import 'package:login_welcome/src/layouts/modal_bottom_logout.dart';
+import 'package:login_welcome/src/core/services/auth_service.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String _nombre = '';
+  int _monto = 0;
+  bool _cargando = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarDatosUsuario();
+  }
+
+  Future<void> _cargarDatosUsuario() async {
+    final datos = await UserService().getUserData();
+    if (datos != null) {
+      setState(() {
+        _nombre = datos['nombre'] ?? 'Usuario';
+        _monto = datos['monto'] ?? 0;
+        _cargando = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final NumberFormat nf = NumberFormat.decimalPattern('es');
-    final int saldo = 1234567890;
-    final String saldoFormateado = nf.format(saldo);
+    final String saldoFormateado = nf.format(_monto);
 
     return Scaffold(
       backgroundColor: ColorsApp.backgroundComponent,
@@ -23,17 +49,20 @@ class HomeScreen extends StatelessWidget {
           child: Stack(
             children: [
               // Texto de bienvenida en la esquina inferior izquierda
-              const Positioned(
+              Positioned(
                 left: 16,
                 bottom: 0,
-                child: Text(
-                  'BIENVENIDO,\nJEFFERSON',
-                  style: TextStyle(
-                    color: ColorsApp.black,
-                    fontFamily: 'BebasNeueRegular',
-                    fontSize: 55,
-                  ),
-                ),
+                child:
+                    _cargando
+                        ? const CircularProgressIndicator()
+                        : Text(
+                          'BIENVENIDO,\n${_nombre.toUpperCase()}',
+                          style: const TextStyle(
+                            color: ColorsApp.black,
+                            fontFamily: 'BebasNeueRegular',
+                            fontSize: 55,
+                          ),
+                        ),
               ),
 
               // Icono de logout en la esquina superior derecha
@@ -53,14 +82,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         color: ColorsApp.backgroundComponent,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Cabecera fija con saldo
             const Text(
               'Tus finanzas',
               textAlign: TextAlign.center,
@@ -75,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 20, color: ColorsApp.white),
                 ),
                 Text(
-                  '\$$saldoFormateado',
+                  _cargando ? 'Cargando...' : '\$$saldoFormateado',
                   style: const TextStyle(
                     fontSize: 20,
                     color: ColorsApp.accent,
@@ -85,8 +112,6 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24),
-
-            // Área desplazable con cards
             Expanded(child: CardsHome()),
           ],
         ),

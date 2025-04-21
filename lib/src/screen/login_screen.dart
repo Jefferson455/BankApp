@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_welcome/src/core/controllers/login_controller.dart';
-import 'package:login_welcome/src/core/services/auth_service.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
 import 'package:login_welcome/src/screen/home_screen.dart';
 import 'package:login_welcome/src/layouts/error_banner.dart';
@@ -17,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passController = TextEditingController();
 
   // instanciamos nuestro controller
-  final _loginController = LoginController(AuthService());
+  final _loginController = LoginController();
 
   void _onLoginPressed() async {
     final username = _userController.text.trim();

@@ -1,16 +1,21 @@
-import '../services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginController {
-  final AuthService _authService;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  LoginController(this._authService);
+  LoginController();
 
   /// Devuelve null si todo ok, o un mensaje de error.
   Future<String?> login(String username, String password) async {
-    final ok = await _authService.authenticate(username, password);
-    if (ok) {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: username.trim(),
+        password: password.trim(),
+      );
       return null;
-    } else {
+    } on FirebaseAuthException catch (e) {
+      return 'Usuario o contraseña incorrecta.';
+    } catch (e) {
       return 'Usuario o contraseña incorrecta.';
     }
   }
