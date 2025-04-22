@@ -23,15 +23,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
@@ -71,4 +65,23 @@ class DefaultFirebaseOptions {
     authDomain: 'bankapp-29f1b.firebaseapp.com',
     storageBucket: 'bankapp-29f1b.firebasestorage.app',
   );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDmrx4X2kdT8i-wdeHkDYphJb1xoq-PB0M',
+    appId: '1:288969786881:ios:5c3d26f3c896bd58d5a200',
+    messagingSenderId: '288969786881',
+    projectId: 'bankapp-29f1b',
+    storageBucket: 'bankapp-29f1b.firebasestorage.app',
+    iosBundleId: 'com.example.loginWelcome',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDmrx4X2kdT8i-wdeHkDYphJb1xoq-PB0M',
+    appId: '1:288969786881:ios:366f1d015a14aa90d5a200',
+    messagingSenderId: '288969786881',
+    projectId: 'bankapp-29f1b',
+    storageBucket: 'bankapp-29f1b.firebasestorage.app',
+    iosBundleId: 'com.jeffer.loginWelcome',
+  );
+
 }
