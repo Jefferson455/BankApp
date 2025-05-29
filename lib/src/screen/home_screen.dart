@@ -4,6 +4,7 @@ import 'package:login_welcome/src/layouts/cards_home.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
 import 'package:login_welcome/src/layouts/modal_bottom_logout.dart';
 import 'package:login_welcome/src/core/services/auth_service.dart';
+import 'package:login_welcome/src/screen/withdraw_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,6 +32,17 @@ class _HomeScreenState extends State<HomeScreen> {
         _monto = datos['monto'] ?? 0;
         _cargando = false;
       });
+    }
+  }
+
+  Future<void> _handleWithdraw() async {
+    final resultado = await Navigator.push<int>(
+      context,
+      MaterialPageRoute(builder: (_) => const WithdrawScreen()),
+    );
+    if (resultado != null) {
+      // Después de retirar, recargar datos de usuario
+      await _cargarDatosUsuario();
     }
   }
 
@@ -112,7 +124,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(height: 24),
-            Expanded(child: CardsHome()),
+            Expanded(
+              child: CardsHome(
+                onWithdraw: _handleWithdraw,
+                onDeposit: () {
+                  // TODO: Implementar depósito
+                },
+                onHistory: () {
+                  // TODO: Navegar al historial
+                },
+              ),
+            ),
           ],
         ),
       ),
