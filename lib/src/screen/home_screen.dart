@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _nombre = '';
-  var _monto = BigInt.from(0);
+  int _monto = 0;
   bool _cargando = true;
 
   @override
