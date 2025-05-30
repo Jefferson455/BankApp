@@ -4,7 +4,9 @@ import 'package:login_welcome/src/layouts/cards_home.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
 import 'package:login_welcome/src/layouts/modal_bottom_logout.dart';
 import 'package:login_welcome/src/core/services/auth_service.dart';
+import 'package:login_welcome/src/screen/bank_selection_screen.dart';
 import 'package:login_welcome/src/screen/deposit_screen.dart';
+import 'package:login_welcome/src/screen/history_screen.dart';
 import 'package:login_welcome/src/screen/withdraw_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,17 +47,41 @@ class _HomeScreenState extends State<HomeScreen> {
       // Después de retirar, recargar datos de usuario
       await _cargarDatosUsuario();
     }
+
+    if (resultado != null && resultado > 0) {
+      final banco = '–'; // o pide banco también si quieres
+      await UserService().withdraw(resultado, banco);
+      await _cargarDatosUsuario();
+    }
   }
 
   Future<void> _handleDeposit() async {
-    final amt = await Navigator.push<int>(
+    // 1) escoger monto
+    final monto = await Navigator.push<int>(
       context,
       MaterialPageRoute(builder: (_) => const DepositScreen()),
     );
-    if (amt != null && amt > 0) {
-      await UserService().deposit(amt);
-      setState(() => _monto += amt);
-    }
+    if (monto == null || monto <= 0) return;
+
+    // 2) escoger banco
+    final banco = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(builder: (_) => BankSelectionScreen(amount: monto)),
+    );
+    if (banco == null) return;
+
+    // 3) depositar
+    await UserService().deposit(monto, banco);
+    // 4) recargar vista
+    await _cargarDatosUsuario();
+  }
+
+  Future<void> _handleHistory() async {
+    final movimientos = await UserService().getMovements(); // tu método
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => HistoryScreen(movements: movimientos)),
+    );
   }
 
   @override
@@ -140,9 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: CardsHome(
                 onWithdraw: _handleWithdraw,
                 onDeposit: _handleDeposit,
-                onHistory: () {
-                  // TODO: Navegar al historial
-                },
+                onHistory: _handleHistory,
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
+import 'package:login_welcome/src/screen/register_screen.dart';
 import 'login_screen.dart'; // Asegúrate de ajustar la ruta según tu estructura de proyecto
 
 class WelcomeScreen extends StatelessWidget {
@@ -25,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
         ),
         centerTitle: false,
       ), */
-      // Puedes omitir el appBar para una pantalla de entrada más limpia
+      // Se omite el appBar para una pantalla de entrada más limpia
       body: Container(
         decoration: BoxDecoration(
           color: ColorsApp.backgroundComponent,
@@ -70,9 +71,12 @@ class WelcomeScreen extends StatelessWidget {
               // 4) Botón
               Center(
                 child: SizedBox(
-                  width: 250,
-                  height: 50,
+                  width: 270,
+                  height: 60,
                   child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(ColorsApp.accent),
+                    ),
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -81,7 +85,39 @@ class WelcomeScreen extends StatelessWidget {
                     },
                     child: const Text(
                       'Iniciar sesión',
-                      style: TextStyle(color: ColorsApp.backgroundComponent),
+                      style: TextStyle(
+                        color: ColorsApp.backgroundComponent,
+                        fontSize: 20,
+                        fontFamily: 'CinzelRegular',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 40),
+              Center(
+                child: SizedBox(
+                  width: 180,
+                  height: 35,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(ColorsApp.white),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (c) => const RegisterScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      '¡Quiero ser cliente!',
+                      style: TextStyle(
+                        color: ColorsApp.backgroundComponentSelected,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ),

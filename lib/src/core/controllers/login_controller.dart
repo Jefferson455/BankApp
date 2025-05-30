@@ -13,7 +13,7 @@ class LoginController {
         password: password.trim(),
       );
       return null;
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       return 'Usuario o contraseña incorrecta.';
     } catch (e) {
       return 'Usuario o contraseña incorrecta.';

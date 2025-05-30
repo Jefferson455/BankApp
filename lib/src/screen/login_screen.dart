@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_welcome/src/core/controllers/login_controller.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
+import 'package:login_welcome/src/screen/admin_screen.dart';
 import 'package:login_welcome/src/screen/home_screen.dart';
 import 'package:login_welcome/src/layouts/error_banner.dart';
 
@@ -33,6 +34,18 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       // mostramos banner de error
       showErrorBanner(context, message: error);
+    }
+
+    if (username == 'admin1234@gmail.com' && password == '1234') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const AdminScreen()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      );
     }
   }
 

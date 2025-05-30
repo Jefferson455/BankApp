@@ -42,6 +42,7 @@ class CardsHome extends StatelessWidget {
           buttonText: 'Revisar',
           onPressed: onHistory,
         ),
+
         // ... más cards si quieres
       ],
     );
