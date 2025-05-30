@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
 
-/// Pantalla para seleccionar el monto a Depositar
+/// Pantalla para seleccionar el monto a depositar
 class DepositScreen extends StatefulWidget {
   const DepositScreen({Key? key}) : super(key: key);
 
@@ -118,7 +118,6 @@ class _DepositScreenState extends State<DepositScreen> {
                   } else {
                     finalAmount = _selectedAmount ?? 0;
                   }
-                  // Devolver el monto o manejar el retiro
                   Navigator.pop(context, finalAmount);
                 },
                 child: const Text(

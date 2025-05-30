@@ -14,4 +14,12 @@ class UserService {
     final doc = await _firestore.collection('users').doc(user.uid).get();
     return doc.data();
   }
+
+  Future<void> deposit(int amount) async {
+    final u = _auth.currentUser;
+    if (u == null) throw Exception('No user');
+    await _firestore.collection('users').doc(u.uid).update({
+      'monto': FieldValue.increment(amount),
+    });
+  }
 }

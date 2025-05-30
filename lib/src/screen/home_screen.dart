@@ -4,6 +4,7 @@ import 'package:login_welcome/src/layouts/cards_home.dart';
 import 'package:login_welcome/src/layouts/colors_app.dart';
 import 'package:login_welcome/src/layouts/modal_bottom_logout.dart';
 import 'package:login_welcome/src/core/services/auth_service.dart';
+import 'package:login_welcome/src/screen/deposit_screen.dart';
 import 'package:login_welcome/src/screen/withdraw_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _nombre = '';
-  int _monto = 0;
+  var _monto = BigInt.from(0);
   bool _cargando = true;
 
   @override
@@ -43,6 +44,17 @@ class _HomeScreenState extends State<HomeScreen> {
     if (resultado != null) {
       // Después de retirar, recargar datos de usuario
       await _cargarDatosUsuario();
+    }
+  }
+
+  Future<void> _handleDeposit() async {
+    final amt = await Navigator.push<int>(
+      context,
+      MaterialPageRoute(builder: (_) => const DepositScreen()),
+    );
+    if (amt != null && amt > 0) {
+      await UserService().deposit(amt);
+      setState(() => _monto += amt);
     }
   }
 
@@ -127,9 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: CardsHome(
                 onWithdraw: _handleWithdraw,
-                onDeposit: () {
-                  // TODO: Implementar depósito
-                },
+                onDeposit: _handleDeposit,
                 onHistory: () {
                   // TODO: Navegar al historial
                 },
